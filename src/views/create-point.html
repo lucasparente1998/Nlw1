@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% set pageId = "page-create-point" %}
+
+{% block name %}
+    <title>Criar um ponto de coleta</title>
+{% endblock name %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/styles/create-point.css">
+    <link rel="stylesheet" href="/styles/modal.css">
+{% endblock styles %}
+
+{% block content %}
+    {% include "partials/page-header.html" %}
+
+    <form action="/savepoint" method="POST">
+        <h1>Cadastro do ponto de coleta</h1>
+
+        <fieldset>
+            <legend>
+                <h2>dados da entidade</h2>
+            </legend>
+
+            <div class="field-group">
+                <div class="field">
+                    <label for="">nome da entidade</label>
+                    <input type="text" name="name" required="required">
+                </div>
+                <div class="field">
+                    <label for="">Imagem da entidade</label>
+                    <input type="url" name="image" placeholder="http://" required="required">
+                </div>
+
+            </div>
+
+            <div class="field-group">
+                <div class="field">
+                    <label for="adress">Endereço</label>
+                    <input type="text" name="adress" required="required">
+                </div>
+                <div class="field">
+                    <label for="adress2">Número/complemento</label>
+                    <input type="text" name="adress2" required="required">
+
+                </div>
+
+            </div>
+
+            <div class="field-group">
+                <div class="field">
+                    <label for="state">Estado</label>
+                    <select name="uf" required="required">
+                        <option value="0">Selecidade o Estado</option>
+                    </select>
+
+                </div>
+                <div class="field">
+                    <label for="city">Cidade</label>
+                    <select name="city" disabled="disabled" required="required">
+                        <option value="">Selecidade a Cidade</option>
+                    </select>
+                    <input type="hidden" name="state">
+                </div>
+
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>
+                <h2>Itens de coleta</h2>
+                <span>Selicione um ou mais itens abaixo</span>
+            </legend>
+            <div class="itens-grid">
+
+                <li data-id="Lâmpadas">
+                    <img src="/assets/lampadas.svg" alt="Lâmpadas">
+                    <span>Lâmpadas
+                    </span>
+                </li>
+
+                <li data-id="Pilhas e Baterias">
+                    <img src="/assets/baterias.svg" alt="Pilhas e Baterias">
+                    <span>Pilhas e Baterias
+                    </span>
+                </li>
+
+                <li data-id="Papéis e Papelão">
+                    <img src="/assets/papeis-papelao.svg" alt="Papéis e Papelão">
+                    <span>Papéis e Papelão
+                    </span>
+                </li>
+
+                <li data-id="Residuos Eletronicos">
+                    <img src="/assets/eletronicos.svg" alt="Residuos Eletronicos">
+                    <span>Residuos Eletronicos
+                    </span>
+                </li>
+
+                <li data-id="Residuos Organicos">
+                    <img src="/assets/organicos.svg" alt="Residuos Organicos">
+                    <span>Residuos Organicos
+                    </span>
+                </li>
+
+                <li data-id="Oleo de Cozinha">
+                    <img src="/assets/oleo.svg" alt="Oleo de cozinha">
+                    <span>Oleo de Cozinha
+                    </span>
+                </li>
+
+            </div>
+
+            <input type="hidden" name="items">
+
+        </fieldset>
+
+        <button type="submit">cadastras ponto de coleta</button>
+
+    </form>
+
+{% endblock content %}
+
+{% block modal %}
+    {% if saved %}
+        {% include "partials/point-created.html"%}
+    {% endif %}
+{% endblock modal %}
+
+{% block scripts %}
+    <script src="/scripts/create-point.js"></script>
+{% endblock scripts %}
